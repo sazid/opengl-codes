@@ -66,6 +66,7 @@ public:
 	}
 
 	void update() {
+	    if (x >= 2.5) x = -2.5;
 		x += speed;
 	}
 
