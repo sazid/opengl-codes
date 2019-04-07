@@ -239,10 +239,10 @@ public:
             glTranslated(x[i], y[i], 0.0);
 
             glBegin(GL_QUADS);
-                glVertex2f( 0.005f, -0.06);
-                glVertex2f( 0.005f,  0.06f);
-                glVertex2f(-0.005f,  0.06f);
-                glVertex2f(-0.005f,  -0.06);
+                glVertex2f( 0.0045f, -0.08);
+                glVertex2f( 0.0045f,  0.08f);
+                glVertex2f(-0.0045f,  0.08f);
+                glVertex2f(-0.0045f,  -0.08f);
             glEnd();
 
             glPopMatrix();
@@ -423,7 +423,7 @@ const int MAX_CARS = 0;
 
 Car *car1;
 Rain *rain;
-Cloud clouds[10];
+Cloud clouds[20];
 Windmill *windmill1, *windmill2, *windmill3, *windmill4;
 
 void createObjects() {
@@ -442,7 +442,7 @@ void createObjects() {
 	//car1->setTireSpeed(-12);
 	car1->setColor(colors[0][0], colors[0][1], colors[0][2]);
 
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 0; i < 20; ++i) {
         clouds[i] = Cloud(urd_cloud_x(re), urd_cloud_y(re), urd_cloud_scale(re), urd_cloud_speed(re));
 	}
 
@@ -541,7 +541,7 @@ void display() {
     //drawSun();
     drawRoad();
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 20; ++i) {
         clouds[i].draw();
         clouds[i].update();
 	}
@@ -574,8 +574,10 @@ void display() {
 
 	glPopMatrix();
 
-	//glColor3ub(240, 240, 240);
-	glColor3ub(115, 103, 127);
+	if (isDayView)
+        glColor3ub(210, 210, 210);
+	else
+        glColor3ub(115, 103, 127);
 	rain->draw();
 	rain->update();
 
